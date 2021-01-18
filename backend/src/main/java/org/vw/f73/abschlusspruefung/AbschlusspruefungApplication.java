@@ -7,6 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class AbschlusspruefungApplication {
 
     public static void main(String[] args) {
+		
         SpringApplication.run(AbschlusspruefungApplication.class, args);
     }
 
