@@ -1,10 +1,12 @@
 package org.vw.f73.abschlusspruefung;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/genericData")
+@Slf4j
 public class GenericRestController {
 
     @Autowired
@@ -12,14 +14,17 @@ public class GenericRestController {
 
     @GetMapping("/get/{data1}")
     public GenericDataClass getGenericData(@PathVariable String data1) {
+        log.debug("Get data for " + data1);
         return repository.findByData1(data1);
     }
 
     @PostMapping("/add")
     public boolean addGenericData(@RequestBody GenericDataClass genericDataClass) {
         if (repository.findByData1(genericDataClass.getData1()) != null) {
+            log.error("Object already exist in the database:\n" + genericDataClass.toString());
             return false;
         } else {
+            log.debug("Added to database.");
             repository.save(genericDataClass);
             return true;
         }
