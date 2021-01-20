@@ -54,6 +54,7 @@
 
 
         <!-- Swagger -->
+        <!--
         <dependency>
             <groupId>io.springfox</groupId>
             <artifactId>springfox-swagger2</artifactId>
@@ -64,6 +65,7 @@
             <artifactId>springfox-swagger-ui</artifactId>
             <version>3.0.0</version>
         </dependency>
+        -->
 
     </dependencies>
 
