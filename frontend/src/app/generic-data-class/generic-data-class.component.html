@@ -1,0 +1,16 @@
+<p>generic-data-class works!</p>
+<mat-form-field>
+  <mat-label>Data1</mat-label>
+  <input matInput type="text" [(ngModel)]="genericDataObject.data1">
+</mat-form-field>
+<mat-form-field>
+  <mat-label>Data2</mat-label>
+  <input matInput type="text" [(ngModel)]="genericDataObject.data2">
+</mat-form-field>
+<mat-form-field>
+  <mat-label>Data3</mat-label>
+  <input matInput type="number" [(ngModel)]="genericDataObject.data3">
+</mat-form-field>
+<button type="button" mat-button (click)="saveGenericDataObject()">Objekt speichern</button>
+<button type="button" mat-button (click)="getGenericDataObjectByID()">Objekt anzeigen</button>
+
