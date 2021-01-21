@@ -7,20 +7,19 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/genericData")
 @Slf4j
+@CrossOrigin(origins="*")
 public class GenericRestController {
 
     @Autowired
     private GenericDataClassRepository repository;
 
     @GetMapping("/get/{data1}")
-    @CrossOrigin(origins = "http://localhost:4200")
     public GenericDataClass getGenericData(@PathVariable String data1) {
         log.debug("Get data for " + data1);
         return repository.findByData1(data1);
     }
 
     @PostMapping("/add")
-    @CrossOrigin(origins = "http://localhost:4200")
     public boolean addGenericData(@RequestBody GenericDataClass genericDataClass) {
         if (repository.findByData1(genericDataClass.getData1()) != null) {
             log.error("Object already exist in the database:\n" + genericDataClass.toString());
