@@ -2,6 +2,7 @@ package org.vw.f73.abschlusspruefung;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -20,14 +21,14 @@ public class GenericRestController {
     }
 
     @PostMapping("/add")
-    public boolean addGenericData(@RequestBody GenericDataClass genericDataClass) {
+    public ResponseEntity addGenericData(@RequestBody GenericDataClass genericDataClass) {
         if (repository.findByData1(genericDataClass.getData1()) != null) {
             log.error("Object already exist in the database:\n" + genericDataClass.toString());
-            return false;
+            return ResponseEntity.ok().build();
         } else {
             log.debug("Added to database.");
             repository.save(genericDataClass);
-            return true;
+            return ResponseEntity.badRequest().build();
         }
     }
 
