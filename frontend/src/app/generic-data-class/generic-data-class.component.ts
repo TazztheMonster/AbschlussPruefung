@@ -19,15 +19,15 @@ export class GenericDataClassComponent implements OnInit {
 
   saveGenericDataObject(): void {
     console.log("gespeichert");
-    this.http.post<GenericDataClass>("http://localhost:8080/add", this.genericDataObject).toPromise().then(data => {
-      this.genericDataObject = data;
+    this.http.post<GenericDataClass>("http://localhost:8080/genericData/add", this.genericDataObject).toPromise().then(data => {
+      this.genericDataObject = { data1: data.data1, data2: data.data2, data3: data.data3 };
     })
   }
 
   getGenericDataObjectByID(): void {
     console.log("ausgelesen.")
-    this.http.get<GenericDataClass>("http://localhost:8080/get/" + this.genericDataObject.data1).toPromise().then(data => {
-      this.genericDataObject = data;
+    this.http.get<GenericDataClass>("http://localhost:8080/genericData/get/" + this.genericDataObject.data1).toPromise().then(data => {
+      this.genericDataObject = { data1: data.data1, data2: data.data2, data3: data.data3 };
     })
   }
 }
