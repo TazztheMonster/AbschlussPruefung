@@ -32,10 +32,14 @@ public class CarDataRestController {
     }
 
     @PostMapping()
-    public ResponseEntity saveADL(@RequestBody CarData car) {
-        log.debug("Saving " + car);
+    public ResponseEntity saveADL(@RequestBody CarData newCar) {
+        log.debug("Saving " + newCar);
         try {
-            repository.save(car);
+            CarData oldCar = repository.findByVin(newCar.getVin());
+            if (oldCar != null && !oldCar.validateUpdate(newCar)) {
+                return ResponseEntity.status(409).build();
+            }
+            repository.save(newCar);
             return ResponseEntity.status(201).build();
         } catch (Exception e) {
             log.error(e.getMessage());
