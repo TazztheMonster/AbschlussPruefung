@@ -1,0 +1,69 @@
+<p>generic-data-class works!</p>
+<div style="text-align: center; display: block;">
+  <div>
+    <mat-form-field>
+      <mat-label>VIN</mat-label>
+      <input matInput type="text" [(ngModel)]="carData.vin">
+    </mat-form-field>
+  </div>
+  <div>
+    <button type="button" mat-button (click)="getCarDataByVIN()">Autodaten anzeigen</button>
+  </div>
+  <div style="display: block;">
+    <div>
+      <mat-form-field>
+        <mat-label>Gps Position latitude</mat-label>
+        <input matInput type="text" [(ngModel)]="carData.gpsPosition.lat">
+      </mat-form-field>
+    </div>
+    <div>
+      <mat-form-field>
+        <mat-label>longtitude</mat-label>
+        <input matInput type="text" [(ngModel)]="carData.gpsPosition.lon">
+      </mat-form-field>
+    </div>
+  </div>
+  <div>
+    <mat-form-field>
+      <mat-label>Number of electromotive belt tensionings</mat-label>
+      <input matInput type="number" [(ngModel)]="carData.embt">
+    </mat-form-field>
+  </div>
+  <div>
+    <mat-form-field>
+      <mat-label>Mileage</mat-label>
+      <input matInput type="number" [(ngModel)]="carData.mileage.autobahn + carData.mileage.city + carData.mileage.country">
+    </mat-form-field>
+  </div>
+  <div>
+    <mat-form-field>
+      <mat-label>Tire pressure</mat-label>
+      <input matInput type="number" [(ngModel)]="carData.tirePressure">
+    </mat-form-field>
+  </div>
+  <div>
+    <mat-form-field>
+      <mat-label>Temperature</mat-label>
+      <input matInput type="number" [(ngModel)]="carData.temperature">
+    </mat-form-field>
+  </div>
+  <div>
+    <mat-form-field>
+      <mat-label>Number of driver seat adjustments</mat-label>
+      <input matInput type="number" [(ngModel)]="carData.nodsa">
+    </mat-form-field>
+  </div>
+  <div>
+    <mat-form-field>
+      <mat-label>Number of media inserted</mat-label>
+      <input matInput type="number" [(ngModel)]="carData.nomi">
+    </mat-form-field>
+  </div>
+  <div>
+    <mat-form-field>
+      <mat-label>Starter battery loading cycles</mat-label>
+      <input matInput type="number" [(ngModel)]="carData.sblc">
+    </mat-form-field>
+  </div>
+</div>
+

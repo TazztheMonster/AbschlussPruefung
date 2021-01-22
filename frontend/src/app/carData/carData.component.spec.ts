@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { GenericDataClassComponent } from './generic-data-class.component';
+import { CarDataComponent } from './carData.component';
 
 describe('GenericDataClassComponent', () => {
-  let component: GenericDataClassComponent;
-  let fixture: ComponentFixture<GenericDataClassComponent>;
+  let component: CarDataComponent;
+  let fixture: ComponentFixture<CarDataComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ GenericDataClassComponent ]
+      declarations: [ CarDataComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(GenericDataClassComponent);
+    fixture = TestBed.createComponent(CarDataComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
