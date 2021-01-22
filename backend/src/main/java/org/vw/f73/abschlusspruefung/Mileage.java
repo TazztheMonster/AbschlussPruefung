@@ -4,9 +4,9 @@ import lombok.Data;
 
 @Data
 public class Mileage {
-    int city;           //in km
-    int autobahn;       //in km
-    int country;        //in km
+    private int city;           //in km
+    private int autobahn;       //in km
+    private int country;        //in km
 
     public boolean validateUpdate(Mileage mileage) {
         return city <= mileage.getCity() &&
