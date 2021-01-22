@@ -4,9 +4,9 @@ metadata:
   name: "loadbalancer-regularien"
 spec:
   selector:
-    app: "regularien-service"
+    app: "frontend-service"
   ports:
     - protocol: "TCP"
       port: 80
-      targetPort: 8080
+      targetPort: 8888
   type: LoadBalancer
