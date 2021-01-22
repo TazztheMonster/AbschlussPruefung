@@ -20,6 +20,16 @@ public class CarData {
     int nomi;                           //number of media inserted
     int sblc;                           //starter battery loading cycles
 
+    public boolean validateUpdate(CarData carData) {
+        return carData.getVin().equals(vin) &&
+                embt <= carData.getEmbt() &&
+                lightOperatingHours <= carData.getLightOperatingHours() &&
+                mileage.validateUpdate(carData.getMileage()) &&
+                nodsa <= carData.getNodsa() &&
+                nomi <= carData.getNomi() &&
+                sblc <= carData.getSblc();
+    }
+
 
 
 }
