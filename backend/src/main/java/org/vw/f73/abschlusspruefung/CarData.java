@@ -1,11 +1,13 @@
 package org.vw.f73.abschlusspruefung;
 
+import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import org.springframework.data.annotation.Id;
 
 @Data
 @EqualsAndHashCode
+@Builder(toBuilder=true)
 public class CarData {
 
     @Id

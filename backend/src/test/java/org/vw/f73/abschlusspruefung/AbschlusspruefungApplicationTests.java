@@ -17,6 +17,28 @@ class AbschlusspruefungApplicationTests {
     @Autowired
     private CarDataRestController carDataRestController;
 
+
+    @Test
+    void carDataUpdateValidation() {
+        CarData car = generateRandomVehicle();
+        Mileage mileage = car.getMileage();
+        CarData car2 = car.toBuilder().mileage(new Mileage(mileage.getCity(), mileage.getAutobahn(), mileage.getCountry())).build();
+
+        Assertions.assertTrue(car.validateUpdate(car2), "Update without changes");
+
+        car2.setEmbt(car.getEmbt()+1);
+        Assertions.assertTrue(car.validateUpdate(car2), "Update wit embt +1");
+        car2.setEmbt(car.getEmbt()-1);
+        Assertions.assertFalse(car.validateUpdate(car2), "Update wit embt -1");
+        car2.setEmbt(car.getEmbt());
+
+        car2.getMileage().setCity(car.getMileage().getCity()+1);
+        Assertions.assertTrue(car.validateUpdate(car2), "Update wit mileageCity +1");
+        car2.getMileage().setCity(car.getMileage().getCity()-1);
+        Assertions.assertFalse(car.validateUpdate(car2), "Update wit mileageCity -1");
+
+    }
+
     @Test
     void carDataRestController() {
         CarData car = generateRandomVehicle();
@@ -28,7 +50,7 @@ class AbschlusspruefungApplicationTests {
 
     @Test
     void dataBaseBasicFunctions() {
-        CarData car = new CarData();
+        CarData car = generateRandomVehicle();
         System.out.println(car);
         repository.save(car);
         CarData car2 = repository.findByVin(car.getVin());
@@ -41,26 +63,22 @@ class AbschlusspruefungApplicationTests {
     private CarData generateRandomVehicle() {
         RandomString randomString = new RandomString(20);
         Random random = new Random();
-        CarData car = new CarData();
-        car.setGpsPosition(new GpsPosition(random.nextDouble(), random.nextDouble()));
-        car.setLightOperatingHours(random.nextDouble());
-        car.setMileage(generateRandomMileage(random));
-        car.setTirePressure(random.nextDouble());
-        car.setVin(randomString.nextString());
-        car.setTemperature(random.nextInt());
-        car.setNodsa(random.nextInt());
-        car.setNomi(random.nextInt());
-        car.setSblc(random.nextInt());
-        car.setEmbt(random.nextInt());
-        return car;
+        return CarData.builder()
+                .gpsPosition(new GpsPosition(random.nextDouble(), random.nextDouble()))
+                .lightOperatingHours(random.nextDouble())
+                .mileage(generateRandomMileage(random))
+                .tirePressure(random.nextDouble())
+                .vin(randomString.nextString())
+                .temperature(random.nextInt())
+                .nodsa(random.nextInt())
+                .nomi(random.nextInt())
+                .sblc(random.nextInt())
+                .embt(random.nextInt())
+                .build();
     }
 
     private Mileage generateRandomMileage(Random random) {
-        Mileage mileage = new Mileage();
-        mileage.setAutobahn(random.nextInt(200000));
-        mileage.setAutobahn(random.nextInt(200000));
-        mileage.setCity(random.nextInt(200000));
-        return mileage;
+        return new Mileage(random.nextInt(200000), random.nextInt(200000), random.nextInt(200000));
     }
 
 }
