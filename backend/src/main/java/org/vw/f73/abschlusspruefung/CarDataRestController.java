@@ -31,7 +31,7 @@ public class CarDataRestController {
         }
     }
 
-    @PostMapping()
+    @PostMapping("/cars")
     public ResponseEntity saveADL(@RequestBody CarData newCar) {
         log.debug("Saving " + newCar);
         try {
