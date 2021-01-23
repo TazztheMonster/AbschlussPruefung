@@ -5,15 +5,17 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
-import { GenericDataClassComponent } from './generic-data-class/generic-data-class.component';
+import { CarDataComponent } from './components/carData/carData.component';
 import { MatInputModule } from '@angular/material/input';
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
+import { LoginComponent } from './components/login/login.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    GenericDataClassComponent
+    CarDataComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
