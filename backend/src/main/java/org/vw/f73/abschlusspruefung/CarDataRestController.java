@@ -17,7 +17,7 @@ public class CarDataRestController {
 
     @GetMapping("/cars/{vin}")
     public ResponseEntity retrieveADLByVin(@PathVariable String vin) {
-        log.debug("Get data for " + vin);
+        log.info("Get data for " + vin);
         try {
             CarData carData = repository.findByVin(vin);
             if (carData != null) {
