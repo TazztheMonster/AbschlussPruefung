@@ -1,0 +1,27 @@
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: regularien-generator
+spec:
+  schedule: "*/1 * * * *"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          volumes:
+            - name: "regularien-yaml"
+              configMap:
+                name: "regularien-yaml"
+                items:
+                  - key: "regularien.yaml"
+                    path: "regularien.yaml"
+          containers:
+            - name: regularien-generator
+              image: "f73-g3.cloudogu.net/achilles/regularien-generator:1.0"
+              volumeMounts:
+                - name: "regularien-yaml"
+                  mountPath: "/app/data"
+              env:
+                - name: REGULARIEN_PATH
+                  value: /app/data/
+          restartPolicy: OnFailure

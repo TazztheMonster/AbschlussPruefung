@@ -13,9 +13,10 @@ public class CarData {
     @Id
     private String vin;
     private GpsPosition gpsPosition;
+    private Mileage mileage;
+    private FillLevels fillLevels;
     private int embt;                           //electro motive belt tensioning
     private double lightOperatingHours;
-    private Mileage mileage;
     private double tirePressure;
     private int temperature;
     private int nodsa;                          //number of driver seat adjustments
