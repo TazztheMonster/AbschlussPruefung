@@ -1,0 +1,20 @@
+- vin: "tew3t3jwf8wf3f90jowj"
+  gpsPosition:
+    - lat: 15.1154
+      lon: 698.523
+  mileage:
+    - city: 115
+      autobahn: 22
+      country: 200
+  fillLevels:
+    - fuel: 80
+      coolant: 50
+      brakeFluid: 75
+      washingWater: 20
+  embt: 55
+  lightOperatingHours: 120
+  tirePressure: 2.2
+  teperature: 12
+  nodsa: 34
+  nomi: 55
+  sblc: 123
