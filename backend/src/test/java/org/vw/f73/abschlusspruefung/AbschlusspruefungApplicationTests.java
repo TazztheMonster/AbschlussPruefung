@@ -74,6 +74,7 @@ class AbschlusspruefungApplicationTests {
                 .nomi(random.nextInt())
                 .sblc(random.nextInt())
                 .embt(random.nextInt())
+                .fillLevels(new FillLevels(random.nextInt(100), random.nextInt(100), random.nextInt(100), random.nextInt(100)))
                 .build();
     }
 
