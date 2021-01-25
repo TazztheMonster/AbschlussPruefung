@@ -1,8 +1,0 @@
-setup.py
-src/regulariengenerator/__init__.py
-src/regulariengenerator/logger.py
-src/regulariengenerator/regularien_gen.py
-src/regulariengenerator.egg-info/PKG-INFO
-src/regulariengenerator.egg-info/SOURCES.txt
-src/regulariengenerator.egg-info/dependency_links.txt
-src/regulariengenerator.egg-info/top_level.txt
