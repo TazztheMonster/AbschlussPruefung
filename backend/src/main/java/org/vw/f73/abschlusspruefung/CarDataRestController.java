@@ -2,7 +2,6 @@ package org.vw.f73.abschlusspruefung;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -33,7 +32,7 @@ public class CarDataRestController {
 
     @PostMapping("/cars")
     public ResponseEntity saveADL(@RequestBody CarData newCar) {
-        log.info("Saving " + newCar);
+        log.debug("Saving " + newCar);
         try {
             CarData oldCar = repository.findByVin(newCar.getVin());
             if (oldCar != null && !oldCar.validateUpdate(newCar)) {
