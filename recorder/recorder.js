@@ -1,6 +1,6 @@
 const fs = require('fs');
 const yaml = require('js-yaml');
-const https = require('https')
+const axios = require('axios');
 
 class FillLevels {
     fuel; //in percent
@@ -46,57 +46,22 @@ class CarData{
 
 try {
     let fileContents = fs.readFileSync('./recorder.yaml', 'utf8');
-    let data = yaml.load(fileContents);
-    let singleCarData = data[0];
-    console.log(singleCarData);
-    allRandom(singleCarData);
+    let carData = yaml.load(fileContents);
+    console.log(carData);
+    allRandom(carData);
 
-
-
-    const data2 = JSON.stringify({
-      singleCarData
-    })
-    
-    const options = {
-      hostname: 'localhost',
-      port: 8080,
-      path: '/adl-api/v1/cars',
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Content-Length': data2.length
-      }
-    }
-    
-    const req = https.request(options, res => {
-      console.log(`statusCode: ${res.statusCode}`)
-    
-      res.on('data', d => {
-        process.stdout.write(d)
-      })
-    })
-    
-    req.on('error', error => {
-      console.error(error)
-    })
-    
-    req.write(data2)
-    req.end()
-
-
-
-
-    console.log(singleCarData);
+    axios.post('http://localhost:8080/adl-api/v1/cars', carData).then(console.log).catch(console.log);
+    fs.writeFileSync(('./recorder.yaml'), yaml.dump(carData));
 } catch (e) {
     console.log(e);
 }
 
-function addRandomAmount(number, multiplyer, isDecimal) {
+function addRandomAmount(number, multiplier, isDecimal) {
     let additionalNumber;
     if (isDecimal) {
-        additionalNumber = Math.floor(Math.random() * multiplyer);
+        additionalNumber = Math.floor(Math.random() * multiplier);
     } else {
-        additionalNumber = Math.random() * multiplyer;
+        additionalNumber = Math.random() * multiplier;
     }
     return number + additionalNumber;
 }
