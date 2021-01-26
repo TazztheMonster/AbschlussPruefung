@@ -17,7 +17,7 @@ public class CarDataRestController {
 
     @GetMapping("/cars/{vin}")
     public ResponseEntity retrieveADLByVin(@PathVariable String vin) {
-        log.info("Get data for " + vin);
+        log.debug("Get data for " + vin);
         try {
             CarData carData = repository.findByVin(vin);
             if (carData != null) {
@@ -33,7 +33,7 @@ public class CarDataRestController {
 
     @PostMapping("/cars")
     public ResponseEntity saveADL(@RequestBody CarData newCar) {
-        log.debug("Saving " + newCar);
+        log.info("Saving " + newCar);
         try {
             CarData oldCar = repository.findByVin(newCar.getVin());
             if (oldCar != null && !oldCar.validateUpdate(newCar)) {
