@@ -1,3 +1,4 @@
+import { FillLevels } from "./FillLevels";
 import { GpsPosition } from "./GpsPosition";
 import { Mileage } from "./Mileage";
 
@@ -8,6 +9,7 @@ export class CarData{
   embt: number; // electromotive belt tensioning
   lightOperatingHours: number;
   mileage: Mileage;
+  fillLevels: FillLevels;
   tirePressure: number;
   temperature: number;
   nodsa: number; //number of driver seat adjustments

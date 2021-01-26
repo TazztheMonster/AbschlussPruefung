@@ -1,0 +1,16 @@
+{
+  "name": "recorder",
+  "version": "1.0.0",
+  "description": "",
+  "main": "recorder.ts",
+  "dependencies": {
+    "axios": "^0.21.1",
+    "js-yaml": "^4.0.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "start": "node ./recorder.js"
+  },
+  "author": "",
+  "license": "ISC"
+}
