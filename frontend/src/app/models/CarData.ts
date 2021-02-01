@@ -20,6 +20,7 @@ export class CarData{
 
     this.gpsPosition = new GpsPosition();
     this.mileage = new Mileage();
+    this.fillLevels = new FillLevels();
 
   }
 
