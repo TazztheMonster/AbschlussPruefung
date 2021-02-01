@@ -12,19 +12,19 @@ To use this project you need ...
 
 ### 2. Preparation
 
-Before you can start with the installation process, you have to build the docker images and push them into your docker registry. Also you have to update the kubernetes yaml files to match with your docker images.
+1. Build the docker images and push them into your docker registry.
+2. Update the kubernetes yaml files to match with your docker images.  
+backend/Dockerfile -> kubernetes/backend/backend.yaml (line 22 "image: \<yourBackendImage\>")  
+frontend/Dockerfile -> kubernetes/frontend/frontend.yaml (line 22 "image: \<yourFrontendImage\>")  
+recorder/Dockerfile -> kubernetes/recorder/recorder.yaml (line 18 "image: \<yourRecorderImage\>")  
 
-backend/Dockerfile -> kubernetes/backend/backend.yaml (line 22 "image: \<yourBackendImage\>")
 
-frontend/Dockerfile -> kubernetes/frontend/frontend.yaml (line 22 "image: \<yourFrontendImage\>")
-
-recorder/Dockerfile -> kubernetes/recorder/recorder.yaml (line 18 "image: \<yourRecorderImage\>")
 
 ### 3. Installation
 
 #### Automatic installation:
 
-We provide a script that does the installation fully automatically. To use that give all the "*.sh" scripts in the main directory execution permissions. 
+1. We provide a script that does the installation fully automatically. To use that give all the "*.sh" scripts in the main directory execution permissions.  
 ```
 chmod +x install.sh
 chmod +x createRecorderYAML.sh
@@ -32,7 +32,8 @@ chmod +x changeDatabaseCredentials.sh
 chmod +x applyDeploymentsAndServices.sh
 chmod +x sd.sh
 ```
-Then run the "install.sh" script in the main directory. (Please execute it while you are in the main directory! The execution while you are in another directory can cause problems!)
+2. Open the install.sh file with a text editor of your choise. Change the variables on the top of the File to match your local conditions or preferences.
+3. Then run the "install.sh" script in the main directory. (Please execute it while you are in the main directory! The execution while you are in another directory can cause problems!)
 
 #### Manual installation:
 
