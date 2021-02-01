@@ -27,11 +27,7 @@ recorder/Dockerfile -> kubernetes/recorder/recorder.yaml (line 18 "image: \<your
 We provide a script that does the installation fully automatically. To use it ...  
 1. Give all the "*.sh" scripts in the main directory execution permissions.  
 ```
-chmod +x install.sh
-chmod +x createRecorderYAML.sh
-chmod +x changeDatabaseCredentials.sh
-chmod +x applyDeploymentsAndServices.sh
-chmod +x sd.sh
+chmod +x install.sh createRecorderYAML.sh changeDatabaseCredentials.sh applyDeploymentsAndServices.sh sd.sh
 ```
 2. Open the install.sh file with a text editor of your choise. Change the variables on the top of the File to match your local conditions or preferences.
 3. Then run the "install.sh" script in the main directory. (Please execute it while you are in the main directory! The execution while you are in another directory can cause problems!)
