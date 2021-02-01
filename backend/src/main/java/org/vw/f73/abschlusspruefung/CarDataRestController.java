@@ -6,7 +6,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/adl-api/v1")
 @Slf4j
 @CrossOrigin(origins="*")
 public class CarDataRestController {
@@ -14,7 +13,7 @@ public class CarDataRestController {
     @Autowired
     private CarDataRepository repository;
 
-    @GetMapping("/cars/{vin}")
+    @GetMapping("/adl-api/v1/cars/{vin}")
     public ResponseEntity retrieveADLByVin(@PathVariable String vin) {
         log.debug("Get data for " + vin);
         try {
@@ -30,7 +29,7 @@ public class CarDataRestController {
         }
     }
 
-    @PostMapping("/cars")
+    @PostMapping("/adl-api/v1/cars")
     public ResponseEntity saveADL(@RequestBody CarData newCar) {
         log.debug("Saving " + newCar);
         try {
@@ -44,6 +43,11 @@ public class CarDataRestController {
             log.error(e.getMessage());
             return ResponseEntity.status(500).build();
         }
+    }
+
+    @GetMapping("/")
+    public ResponseEntity tellIngressEverythingIsFine() {
+            return ResponseEntity.status(200).build();
     }
 
 }

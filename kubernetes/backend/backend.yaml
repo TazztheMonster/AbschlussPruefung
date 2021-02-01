@@ -1,0 +1,50 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: backend
+      track: stable
+  template:
+    metadata:
+      labels:
+        app: backend
+        track: stable
+        version: 1.0.0
+    spec:
+      imagePullSecrets:
+      - name: regcred
+      containers:
+        - name: backend
+          image: f73-g2.cloudogu.net/achilles/backend:1.6
+          ports:
+          - containerPort: 8080
+          env:
+            - name: MONGO_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: mongo-secret
+                  key: username
+            - name: MONGO_PASS
+              valueFrom:
+                secretKeyRef:
+                  name: mongo-secret
+                  key: password
+            - name: MONGO_HOST
+              valueFrom:
+                configMapKeyRef:
+                  name: backend-map
+                  key: host
+            - name: MONGO_PORT
+              valueFrom:
+                configMapKeyRef:
+                  name: backend-map
+                  key: port
+            - name: MONGO_DATABASE
+              valueFrom:
+                configMapKeyRef:
+                  name: backend-map
+                  key: database

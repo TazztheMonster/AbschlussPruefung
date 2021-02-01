@@ -1,0 +1,29 @@
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: recorder
+spec:
+  schedule: "*/2 * * * *"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          volumes:
+          - name: recorder-storage
+            hostPath:
+              path: /mnt/stateful_partition/data
+              type: Directory
+          containers:
+          - name: recorder
+            image: f73-g2.cloudogu.net/achilles/recorder:1.4
+            env:
+            - name: URL
+              value: backend
+            - name: PORT
+              value: "8080"
+            volumeMounts:
+            - name: recorder-storage
+              mountPath: /usr/src/app/data
+          imagePullSecrets:
+          - name: regcred
+          restartPolicy: OnFailure
