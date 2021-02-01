@@ -1,0 +1,48 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backend-service
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: backend-service
+      track: stable
+  template:
+    metadata:
+      labels:
+        app: backend-service
+        track: stable
+        version: 1.0.0
+    spec:
+      imagePullSecrets:
+      - name: regcred
+      containers:
+        - name: backend-service
+          image: "localhost:5000/backend:1.0"
+          env:
+            - name: MONGO_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: mongo-secret
+                  key: username
+            - name: MONGO_PASS
+              valueFrom:
+                secretKeyRef:
+                  name: mongo-secret
+                  key: password
+            - name: MONGO_HOST
+              valueFrom:
+                configMapKeyRef:
+                  name: backend-map
+                  key: host
+            - name: MONGO_PORT
+              valueFrom:
+                configMapKeyRef:
+                  name: backend-map
+                  key: port
+            - name: MONGO_DB
+              valueFrom:
+                configMapKeyRef:
+                  name: backend-map
+                  key: database
