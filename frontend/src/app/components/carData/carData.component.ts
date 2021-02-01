@@ -19,7 +19,7 @@ export class CarDataComponent implements OnInit {
 
   getCarDataByVIN(): void {
     console.log("Vin " + this.carData.vin + " ausgelesen.")
-    this.http.get<CarData>("http://localhost:8080/adl-api/v1/cars/" + this.carData.vin).toPromise().then(data => {
+    this.http.get<CarData>("/backend/adl-api/v1/cars/" + this.carData.vin).toPromise().then(data => {
       this.carData = { vin: data.vin,
                       gpsPosition: { lon: data.gpsPosition.lon, lat: data.gpsPosition.lat },
                       fillLevels: { fuel: data.fillLevels.fuel, washingWater: data.fillLevels.washingWater, brakeFluid: data.fillLevels.brakeFluid, coolant: data.fillLevels.coolant},
