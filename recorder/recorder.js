@@ -45,13 +45,11 @@ class CarData{
 }
 
 try {
-    let fileContents = fs.readFileSync('./recorder.yaml', 'utf8');
+    let fileContents = fs.readFileSync('./data/recorder.yaml', 'utf8');
     let carData = yaml.load(fileContents);
-    console.log(carData);
     allRandom(carData);
-
-    axios.post('http://localhost:8080/adl-api/v1/cars', carData).then(console.log).catch(console.log);
-    fs.writeFileSync(('./recorder.yaml'), yaml.dump(carData));
+    axios.post('http://' + process.env.URL + ':' + process.env.PORT + '/adl-api/v1/cars', carData).then(console.log).catch(console.log);
+    fs.writeFileSync(('./data/recorder.yaml'), yaml.dump(carData));
 } catch (e) {
     console.log(e);
 }
