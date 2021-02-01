@@ -1,25 +1,27 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: backend-service
+  name: backend
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
-      app: backend-service
+      app: backend
       track: stable
   template:
     metadata:
       labels:
-        app: backend-service
+        app: backend
         track: stable
         version: 1.0.0
     spec:
       imagePullSecrets:
       - name: regcred
       containers:
-        - name: backend-service
-          image: "localhost:5000/backend:1.0"
+        - name: backend
+          image: f73-g2.cloudogu.net/achilles/backend:1.6
+          ports:
+          - containerPort: 8080
           env:
             - name: MONGO_USERNAME
               valueFrom:
@@ -41,7 +43,7 @@ spec:
                 configMapKeyRef:
                   name: backend-map
                   key: port
-            - name: MONGO_DB
+            - name: MONGO_DATABASE
               valueFrom:
                 configMapKeyRef:
                   name: backend-map

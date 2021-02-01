@@ -3,6 +3,6 @@ kind: ConfigMap
 metadata:
   name: backend-map
 data:
-  host: "mongodb.default"
+  host: mongodb
   port: "27017"
-  database: "test"
+  database: carData
