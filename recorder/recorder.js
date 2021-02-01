@@ -45,6 +45,7 @@ class CarData{
 }
 
 try {
+    initialYamlCreation("./data", "/recorder.yaml")
     let fileContents = fs.readFileSync('./data/recorder.yaml', 'utf8');
     let carData = yaml.load(fileContents);
     allRandom(carData);
@@ -89,6 +90,21 @@ function fullRandom(multiplyer, isDecimal) {
         return Math.floor(Math.random()) * multiplyer;
     } else {
         return Math.random() * multiplyer;
+    }
+}
+
+function initialYamlCreation(dir, file) {
+    if (!fs.existsSync(dir)) {
+        fs.mkdir(dir, function(err) {
+            if (err){
+            console.log(err);
+            }
+        });
+    }
+    if (!fs.existsSync(dir + file)) {
+        let fileContents = fs.readFileSync('./initialRecorder.yaml', 'utf8');
+        let carData = yaml.load(fileContents);
+        fs.writeFileSync((dir + file), yaml.dump(carData));
     }
 }
 

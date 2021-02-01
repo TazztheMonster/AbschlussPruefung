@@ -1,0 +1,20 @@
+vin: vw00t3jwf8wf3f90jowj
+gpsPosition:
+  lat: 3.396887137948883
+  lon: 3.284554152400397
+mileage:
+  city: 0
+  autobahn: 0
+  country: 0
+fillLevels:
+  fuel: 75
+  coolant: 90
+  brakeFluid: 90
+  washingWater: 90
+embt: 1
+lightOperatingHours: 0.1
+tirePressure: 2.05
+teperature: 12
+nodsa: 1
+nomi: 2
+sblc: 1
