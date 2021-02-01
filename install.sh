@@ -21,6 +21,9 @@ helm install mongodb --set auth.username=$dbUser,auth.password=$dbPass,auth.data
 #add recorderYaml to root node
 sh ./createRecorderYAML.sh $node
 
+#apply kubernetes files
+sh ./applyDeploymentsAndServices.sh
+
 
 
 #dau protection
