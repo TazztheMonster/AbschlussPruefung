@@ -13,12 +13,13 @@ import java.util.stream.Collectors;
 @RestController
 @Slf4j
 @CrossOrigin(origins="*")
+@RequestMapping("/v1")
 public class CarDataRestController {
 
     @Autowired
     private CarDataRepository repository;
 
-    @GetMapping("/adl-api/v1/cars/{vin}")
+    @GetMapping("/cars/{vin}")
     public ResponseEntity retrieveADLByVin(@PathVariable String vin) {
         log.debug("Get data for " + vin);
         try {
@@ -34,13 +35,13 @@ public class CarDataRestController {
         }
     }
 
-    @GetMapping("/adl-api/v1/cars/{vin}/{numberOfEntries}")
+    @GetMapping("/cars/{vin}/{numberOfEntries}")
     public ResponseEntity retrieveADLByVin(@PathVariable String vin, @PathVariable int numberOfEntries) {
         List<CarData> cars = repository.findByVinOrderByTimeStampDesc(vin);
         return ResponseEntity.status(200).body(cars.stream().limit(numberOfEntries).collect(Collectors.toList()));
     }
 
-    @PostMapping("/adl-api/v1/cars")
+    @PostMapping("/cars")
     public ResponseEntity saveADL(@RequestBody CarData newCar) {
         log.debug("Saving " + newCar);
         try {
