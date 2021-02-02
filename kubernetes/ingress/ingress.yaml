@@ -9,8 +9,8 @@ spec:
       - path: /*
         backend:
           serviceName: frontend
-          servicePort: 4200
-      - path: /backend/*
+          servicePort: 80
+      - path: /adl-api/*
         backend:
           serviceName: backend
           servicePort: 8080

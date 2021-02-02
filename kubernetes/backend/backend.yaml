@@ -19,7 +19,7 @@ spec:
       - name: regcred
       containers:
         - name: backend
-          image: f73-g2.cloudogu.net/achilles/backend:1.6
+          image: f73-g2.cloudogu.net/achilles/backend:1.8
           ports:
           - containerPort: 8080
           env:
@@ -28,7 +28,7 @@ spec:
                 secretKeyRef:
                   name: mongo-secret
                   key: username
-            - name: MONGO_PASS
+            - name: MONGO_PASSWORD
               valueFrom:
                 secretKeyRef:
                   name: mongo-secret
