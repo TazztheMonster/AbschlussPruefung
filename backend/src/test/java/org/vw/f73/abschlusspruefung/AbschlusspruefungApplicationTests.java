@@ -53,11 +53,11 @@ class AbschlusspruefungApplicationTests {
         CarData car = generateRandomVehicle();
         System.out.println(car);
         repository.save(car);
-        CarData car2 = repository.findFirstByVin(car.getVin());
+        CarData car2 = repository.findTopByVinOrderByTimeStampDesc(car.getVin());
         Assertions.assertNotNull(car2);
         Assertions.assertEquals(car2, car, "Car saved and loaded.");
         repository.delete(car);
-        Assertions.assertNull(repository.findFirstByVin(car.getVin()), "car deleted.");
+        Assertions.assertNull(repository.findTopByVinOrderByTimeStampDesc(car.getVin()), "car deleted.");
     }
 
     private CarData generateRandomVehicle() {

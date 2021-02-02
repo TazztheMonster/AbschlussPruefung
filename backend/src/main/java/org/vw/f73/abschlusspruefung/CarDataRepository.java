@@ -6,8 +6,7 @@ import java.util.List;
 
 public interface CarDataRepository extends MongoRepository<CarData, String> {
 
-    public CarData findFirstByVin (String s);
-    public List<CarData> findTopNByVinOrderByTimeStamp(String vin, int n);
-    public List<CarData> findTopByVinOrderByTimeStamp(String vin);
+    public CarData findTopByVinOrderByTimeStampDesc (String vin);
+    public List<CarData> findByVinOrderByTimeStampDesc(String vin);
 
 }

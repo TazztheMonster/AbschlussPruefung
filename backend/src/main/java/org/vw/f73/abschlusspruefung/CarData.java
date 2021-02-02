@@ -3,9 +3,7 @@ package org.vw.f73.abschlusspruefung;
 import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import org.springframework.beans.factory.annotation.Value;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Data
@@ -17,6 +15,7 @@ public class CarData {
     private GpsPosition gpsPosition;
     private Mileage mileage;
     private FillLevels fillLevels;
+    //private boolean valid;
     private int embt;                           //electro motive belt tensioning
     private double lightOperatingHours;
     private double tirePressure;

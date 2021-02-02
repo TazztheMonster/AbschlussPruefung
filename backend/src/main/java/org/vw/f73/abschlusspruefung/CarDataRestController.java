@@ -5,9 +5,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @Slf4j
@@ -21,7 +22,7 @@ public class CarDataRestController {
     public ResponseEntity retrieveADLByVin(@PathVariable String vin) {
         log.debug("Get data for " + vin);
         try {
-            CarData carData = repository.findFirstByVin(vin);
+            CarData carData = repository.findTopByVinOrderByTimeStampDesc(vin);
             if (carData != null) {
                 return ResponseEntity.status(200).body(carData);
             } else {
@@ -33,24 +34,25 @@ public class CarDataRestController {
         }
     }
 
-    @GetMapping("/adl-api/v1/cars/{vin}/{number}")
-    public ResponseEntity retrieveADLByVin(@PathVariable String vin, @PathVariable int number) {
-        List<CarData> cars = repository.findTopByVinOrderByTimeStamp(vin);
-        return ResponseEntity.status(200).body(cars);
+    @GetMapping("/adl-api/v1/cars/{vin}/{numberOfEntries}")
+    public ResponseEntity retrieveADLByVin(@PathVariable String vin, @PathVariable int numberOfEntries) {
+        List<CarData> cars = repository.findByVinOrderByTimeStampDesc(vin);
+        return ResponseEntity.status(200).body(cars.stream().limit(numberOfEntries).collect(Collectors.toList()));
     }
 
     @PostMapping("/adl-api/v1/cars")
     public ResponseEntity saveADL(@RequestBody CarData newCar) {
-        newCar.setTimeStamp(LocalDateTime.now());
         log.debug("Saving " + newCar);
         try {
-            CarData oldCar = repository.findFirstByVin(newCar.getVin());
-            if (oldCar != null && !oldCar.validateUpdate(newCar)) {
-                return ResponseEntity.status(409).build();
-            }
+            //CarData oldCar = repository.findTopByVinOrderByTimeStampDesc(newCar.getVin());
+            newCar.setTimeStamp(LocalDateTime.now());
+            //newCar.setValid(newCar.validateUpdate(oldCar));
             repository.save(newCar);
-            log.info(newCar.getTimeStamp().toString());
-            return ResponseEntity.status(201).build();
+            //if (newCar.isValid()) {
+            //    return ResponseEntity.status(409).build();
+            //} else {
+                return ResponseEntity.status(201).build();
+            //}
         } catch (Exception e) {
             log.error(e.getMessage());
             return ResponseEntity.status(500).build();
