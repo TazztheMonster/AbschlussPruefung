@@ -3,14 +3,16 @@ package org.vw.f73.abschlusspruefung;
 import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import org.springframework.data.annotation.Id;
+import org.springframework.beans.factory.annotation.Value;
+
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Data
 @EqualsAndHashCode
 @Builder(toBuilder=true)
 public class CarData {
-
-    @Id
+    private LocalDateTime timeStamp;
     private String vin;
     private GpsPosition gpsPosition;
     private Mileage mileage;
