@@ -13,7 +13,7 @@ import java.util.stream.Collectors;
 @RestController
 @Slf4j
 @CrossOrigin(origins="*")
-@RequestMapping("/v1")
+@RequestMapping("/adl-api/v1")
 public class CarDataRestController {
 
     @Autowired
@@ -60,8 +60,13 @@ public class CarDataRestController {
         }
     }
 
-    @GetMapping("/")
-    public ResponseEntity tellIngressEverythingIsFine() {
+    @GetMapping("/alive")
+    public ResponseEntity tellIngressEverythingIsAlive() {
+            return ResponseEntity.status(200).build();
+    }
+
+     @GetMapping("/ready")
+    public ResponseEntity tellIngressEverythingIsReady() {
             return ResponseEntity.status(200).build();
     }
 

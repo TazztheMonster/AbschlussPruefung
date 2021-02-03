@@ -9,6 +9,8 @@ import { CarDataComponent } from './components/carData/carData.component';
 import { MatInputModule } from '@angular/material/input';
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatSelectModule } from '@angular/material/select';
 import { LoginComponent } from './components/login/login.component';
 
 @NgModule({
@@ -24,7 +26,9 @@ import { LoginComponent } from './components/login/login.component';
     HttpClientModule,
     MatInputModule,
     FormsModule,
-    MatButtonModule
+    MatButtonModule,
+    MatFormFieldModule,
+    MatSelectModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

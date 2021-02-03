@@ -9,23 +9,32 @@ import { CarData } from '../../models/CarData';
 })
 export class CarDataComponent implements OnInit {
 
-  carData: CarData;
+  selectedVIN: string = '';
+  carData: CarData[];
+  numberOfDataSets: number[];
+  selectedAmount: number;
 
   constructor(private http:HttpClient) { }
 
   ngOnInit(): void {
-    this.carData = new CarData();
+    this.carData = [];
+    this.numberOfDataSets = [1, 2, 3, 4, 5];
+    this.selectedAmount = 1;
   }
 
   getCarDataByVIN(): void {
-    console.log("Vin " + this.carData.vin + " ausgelesen.")
-    this.http.get<CarData>("/adl-api/v1/cars/" + this.carData.vin).toPromise().then(data => {
-      this.carData = { vin: data.vin,
-                      gpsPosition: { lon: data.gpsPosition.lon, lat: data.gpsPosition.lat },
-                      fillLevels: { fuel: data.fillLevels.fuel, washingWater: data.fillLevels.washingWater, brakeFluid: data.fillLevels.brakeFluid, coolant: data.fillLevels.coolant},
-                      embt: data.embt, lightOperatingHours: data.lightOperatingHours,
-                      mileage: { autobahn: data.mileage.autobahn, city: data.mileage.city, country: data.mileage.country },
-                      tirePressure: data.tirePressure, temperature: data.temperature, nodsa: data.nodsa, nomi: data.nomi, sblc: data.sblc};
+    console.log("Vin " + this.selectedVIN + "mit " + this.selectedAmount + "Datensätzen ausgelesen.");
+    this.carData = [];
+    this.http.get<CarData[]>("/adl-api/v1/cars/" + this.selectedVIN + "/" + this.selectedAmount).toPromise().then(data => {
+      data.forEach(e => {
+        let carToAdd = { vin: e.vin,
+          gpsPosition: { lon: e.gpsPosition.lon, lat: e.gpsPosition.lat },
+          fillLevels: { fuel: e.fillLevels.fuel, washingWater: e.fillLevels.washingWater, brakeFluid: e.fillLevels.brakeFluid, coolant: e.fillLevels.coolant},
+          embt: e.embt, lightOperatingHours: e.lightOperatingHours,
+          mileage: { autobahn: e.mileage.autobahn, city: e.mileage.city, country: e.mileage.country },
+          tirePressure: e.tirePressure, temperature: e.temperature, nodsa: e.nodsa, nomi: e.nomi, sblc: e.sblc};
+        this.carData.push(carToAdd);
+      })
     })
   }
 }

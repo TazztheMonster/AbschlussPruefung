@@ -2,108 +2,118 @@
   <div>
     <mat-form-field>
       <mat-label>VIN</mat-label>
-      <input matInput type="text" [(ngModel)]="carData.vin">
+      <input matInput type="text" [(ngModel)]="selectedVIN">
     </mat-form-field>
   </div>
   <div>
     <button type="button" mat-button (click)="getCarDataByVIN()">Autodaten anzeigen</button>
   </div>
-  <div style="display: block;">
+  <div>
+    <mat-form-field appearance="fill">
+      <mat-label>Anzahl der gewünschten Datansätze</mat-label>
+      <mat-select [(ngModel)]="selectedAmount" required>
+        <mat-option *ngFor="let number of numberOfDataSets" [value]="number">{{number}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+  <div *ngFor="let car of carData; let i = index">
+    <div style="display: block;">
+      <div>
+        <mat-form-field>
+          <mat-label>Gps Position latitude</mat-label>
+          <input matInput type="text" [(ngModel)]="car.gpsPosition.lat">
+        </mat-form-field>
+      </div>
+      <div>
+        <mat-form-field>
+          <mat-label>longtitude</mat-label>
+          <input matInput type="text" [(ngModel)]="car.gpsPosition.lon">
+        </mat-form-field>
+      </div>
+    </div>
     <div>
       <mat-form-field>
-        <mat-label>Gps Position latitude</mat-label>
-        <input matInput type="text" [(ngModel)]="carData.gpsPosition.lat">
+        <mat-label>fuel level</mat-label>
+        <input matInput type="number" [(ngModel)]="car.fillLevels.fuel">
       </mat-form-field>
     </div>
     <div>
       <mat-form-field>
-        <mat-label>longtitude</mat-label>
-        <input matInput type="text" [(ngModel)]="carData.gpsPosition.lon">
+        <mat-label>coolant level</mat-label>
+        <input matInput type="number" [(ngModel)]="car.fillLevels.coolant">
       </mat-form-field>
     </div>
-  </div>
-  <div>
-    <mat-form-field>
-      <mat-label>fuel level</mat-label>
-      <input matInput type="number" [(ngModel)]="carData.fillLevels.fuel">
-    </mat-form-field>
-  </div>
-  <div>
-    <mat-form-field>
-      <mat-label>coolant level</mat-label>
-      <input matInput type="number" [(ngModel)]="carData.fillLevels.coolant">
-    </mat-form-field>
-  </div>
-  <div>
-    <mat-form-field>
-      <mat-label>brake fluid level</mat-label>
-      <input matInput type="number" [(ngModel)]="carData.fillLevels.brakeFluid">
-    </mat-form-field>
-  </div>
-  <div>
-    <mat-form-field>
-      <mat-label>washing water level</mat-label>
-      <input matInput type="number" [(ngModel)]="carData.fillLevels.washingWater">
-    </mat-form-field>
-  </div>
-  <div>
-    <mat-form-field>
-      <mat-label>number of electromotive belt tensionings</mat-label>
-      <input matInput type="number" [(ngModel)]="carData.embt">
-    </mat-form-field>
-  </div>
-  <div>
-    <mat-form-field>
-      <mat-label>mileage</mat-label>
-      <input matInput type="number" [(ngModel)]="carData.mileage.autobahn + carData.mileage.city + carData.mileage.country">
-    </mat-form-field>
-  </div>
-  <div>
-    <mat-form-field>
-      <mat-label>mileage on Autobahn</mat-label>
-      <input matInput type="number" [(ngModel)]="carData.mileage.autobahn">
-    </mat-form-field>
-  </div>
-  <div>
-    <mat-form-field>
-      <mat-label>mileage in City</mat-label>
-      <input matInput type="number" [(ngModel)]="carData.mileage.city">
-    </mat-form-field>
-  </div>
-  <div>
-    <mat-form-field>
-      <mat-label>mileage on Countryroads</mat-label>
-      <input matInput type="number" [(ngModel)]="carData.mileage.country">
-    </mat-form-field>
-  </div>
-  <div>
-    <mat-form-field>
-      <mat-label>tire pressure</mat-label>
-      <input matInput type="number" [(ngModel)]="carData.tirePressure">
-    </mat-form-field>
-  </div>
-  <div>
-    <mat-form-field>
-      <mat-label>temperature</mat-label>
-      <input matInput type="number" [(ngModel)]="carData.temperature">
-    </mat-form-field>
-  </div>
-  <div>
-    <mat-form-field>
-      <mat-label>number of driver seat adjustments</mat-label>
-      <input matInput type="number" [(ngModel)]="carData.nodsa">
-    </mat-form-field>
-  </div>
-  <div>
-    <mat-form-field>
-      <mat-label>number of media inserted</mat-label>
-      <input matInput type="number" [(ngModel)]="carData.nomi">
-    </mat-form-field>
-  </div>
-  <div>
-    <mat-form-field>
-      <mat-label>starter battery loading cycles</mat-label>
-      <input matInput type="number" [(ngModel)]="carData.sblc">
-    </mat-form-field>
+    <div>
+      <mat-form-field>
+        <mat-label>brake fluid level</mat-label>
+        <input matInput type="number" [(ngModel)]="car.fillLevels.brakeFluid">
+      </mat-form-field>
+    </div>
+    <div>
+      <mat-form-field>
+        <mat-label>washing water level</mat-label>
+        <input matInput type="number" [(ngModel)]="car.fillLevels.washingWater">
+      </mat-form-field>
+    </div>
+    <div>
+      <mat-form-field>
+        <mat-label>number of electromotive belt tensionings</mat-label>
+        <input matInput type="number" [(ngModel)]="car.embt">
+      </mat-form-field>
+    </div>
+    <div>
+      <mat-form-field>
+        <mat-label>mileage</mat-label>
+        <input matInput type="number" [(ngModel)]="car.mileage.autobahn + car.mileage.city + car.mileage.country">
+      </mat-form-field>
+    </div>
+    <div>
+      <mat-form-field>
+        <mat-label>mileage on Autobahn</mat-label>
+        <input matInput type="number" [(ngModel)]="car.mileage.autobahn">
+      </mat-form-field>
+    </div>
+    <div>
+      <mat-form-field>
+        <mat-label>mileage in City</mat-label>
+        <input matInput type="number" [(ngModel)]="car.mileage.city">
+      </mat-form-field>
+    </div>
+    <div>
+      <mat-form-field>
+        <mat-label>mileage on Countryroads</mat-label>
+        <input matInput type="number" [(ngModel)]="car.mileage.country">
+      </mat-form-field>
+    </div>
+    <div>
+      <mat-form-field>
+        <mat-label>tire pressure</mat-label>
+        <input matInput type="number" [(ngModel)]="car.tirePressure">
+      </mat-form-field>
+    </div>
+    <div>
+      <mat-form-field>
+        <mat-label>temperature</mat-label>
+        <input matInput type="number" [(ngModel)]="car.temperature">
+      </mat-form-field>
+    </div>
+    <div>
+      <mat-form-field>
+        <mat-label>number of driver seat adjustments</mat-label>
+        <input matInput type="number" [(ngModel)]="car.nodsa">
+      </mat-form-field>
+    </div>
+    <div>
+      <mat-form-field>
+        <mat-label>number of media inserted</mat-label>
+        <input matInput type="number" [(ngModel)]="car.nomi">
+      </mat-form-field>
+    </div>
+    <div>
+      <mat-form-field>
+        <mat-label>starter battery loading cycles</mat-label>
+        <input matInput type="number" [(ngModel)]="car.sblc">
+      </mat-form-field>
+    </div>
   </div>
 </div>

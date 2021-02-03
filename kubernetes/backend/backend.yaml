@@ -19,9 +19,21 @@ spec:
       - name: regcred
       containers:
         - name: backend
-          image: f73-g2.cloudogu.net/achilles/backend:1.8
+          image: f73-g2.cloudogu.net/achilles/backend:2.5
           ports:
           - containerPort: 8080
+          readinessProbe:
+            initialDelaySeconds: 20
+            httpGet:
+              path: /adl-api/v1/ready
+              port: 8080
+            periodSeconds: 10
+            timeoutSeconds: 5
+          livenessProbe:
+            initialDelaySeconds: 20
+            httpGet:
+              path: /adl-api/v1/alive
+              port: 8080
           env:
             - name: MONGO_USERNAME
               valueFrom:
