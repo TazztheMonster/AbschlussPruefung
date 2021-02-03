@@ -42,9 +42,9 @@ chmod +x install.sh changeDatabaseCredentials.sh applyDeploymentsAndServices.sh 
 
 ### 4. Usage
 
-The IP to reach the Service (21/02/03) is http://34.117.37.50/.
-Username: WVWZZZ1KZDP045466
-Password: rootPass123!
+The IP to reach the Service (21/02/03) is http://34.117.37.50/.  
+Username: WVWZZZ1KZDP045466  
+Password: rootPass123!  
 
 The one simulated car has the vin vw00t3jwf8wf3f90jowj
 
