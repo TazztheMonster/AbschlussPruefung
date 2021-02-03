@@ -18,9 +18,6 @@ helm repo update
 helm install mongodb --set auth.username=$dbUser,auth.password=$dbPass,auth.database=$dbName bitnami/mongodb
 ./changeDatabaseCredentials.sh $dbName $dbUser $dbPass
 
-#add recorderYaml to root node
-sh ./createRecorderYAML.sh $node
-
 #apply kubernetes files
 sh ./applyDeploymentsAndServices.sh
 
