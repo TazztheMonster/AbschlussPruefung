@@ -37,9 +37,14 @@ public class CarDataRestController {
 
     @GetMapping("/adl-api/v1/cars/{vin}/{numberOfEntries}")
     public ResponseEntity retrieveADLByVin(@PathVariable String vin, @PathVariable int numberOfEntries) {
-        log.debug("Get last " + numberOfEntries + " datasets from " + vin);
-        List<CarData> cars = repository.findByVinOrderByTimeStampDesc(vin);
-        return ResponseEntity.status(200).body(cars.stream().limit(numberOfEntries).collect(Collectors.toList()));
+        try {
+            log.debug("Get last " + numberOfEntries + " datasets from " + vin);
+            List<CarData> cars = repository.findByVinOrderByTimeStampDesc(vin);
+            return ResponseEntity.status(200).body(cars.stream().limit(numberOfEntries).collect(Collectors.toList()));
+        } catch (Exception e) {
+            log.error(e.getMessage());
+            return ResponseEntity.status(500).build();
+        }
     }
 
     @PostMapping("/adl-api/v1/cars")
